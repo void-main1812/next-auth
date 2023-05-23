@@ -63,6 +63,7 @@ export const AuthForm = () => {
               placeholder="John Doe"
               required={true}
               register={register}
+              disabled={isLoading}
             />
           )}
           <Input
@@ -73,6 +74,7 @@ export const AuthForm = () => {
             type="email"
             placeholder="jhon@gmail.com"
             register={register}
+            disabled={isLoading}
           />
           <Input
             id="password"
@@ -82,6 +84,7 @@ export const AuthForm = () => {
             required={true}
             placeholder="ajlihj@123"
             register={register}
+            disabled={isLoading}
           />
           {variant === "REGISTER" && (
             <Input
@@ -92,6 +95,7 @@ export const AuthForm = () => {
               required={true}
               placeholder="ajlihj@123"
               register={register}
+              disabled={isLoading}
             />
           )}
           <Button fullWidth type="submit" disabled={isLoading}>
