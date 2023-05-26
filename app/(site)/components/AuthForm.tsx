@@ -6,6 +6,9 @@ import { Input } from "@/app/components/inputs/Input";
 import Button from "@/app/components/button";
 import AuthSocialButton from "./AuthSocialButton";
 import { BsGithub, BsGoogle } from "react-icons/bs";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 type Variant = "LOGIN" | "REGISTER";
 export const AuthForm = () => {
@@ -37,11 +40,26 @@ export const AuthForm = () => {
     setIsLoading(true);
 
     if (variant === "LOGIN") {
-      //login
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("Invalid Credentials");
+          }
+          if (callback?.ok && !callback?.error) {
+            toast.success("Logged In Successfully");
+          }
+        })
+        .finally(() => setIsLoading(false));
     }
 
     if (variant === "REGISTER") {
-      //register
+      axios
+        .post("/api/register", data)
+        .catch(() => toast.error("Something went wrong"))
+        .finally(() => setIsLoading(false));
     }
   };
 
@@ -86,7 +104,7 @@ export const AuthForm = () => {
             register={register}
             disabled={isLoading}
           />
-          {variant === "REGISTER" && (
+          {/* {variant === "REGISTER" && (    //this field is optional only for register
             <Input
               id="confirmPassword"
               errors={errors}
@@ -97,7 +115,7 @@ export const AuthForm = () => {
               register={register}
               disabled={isLoading}
             />
-          )}
+          )} */}
           <Button fullWidth type="submit" disabled={isLoading}>
             {variant === "LOGIN" ? "Login" : "Sign Up"}
           </Button>
