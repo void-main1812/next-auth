@@ -154,6 +154,7 @@ export const AuthForm = () => {
               </span>
             </div>
           </div>
+          {/* Social Login Buttons */}
           <div className="mt-6 flex gap-2">
             <AuthSocialButton
               icon={BsGithub}
