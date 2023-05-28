@@ -1,16 +1,28 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "@/app/components/inputs/Input";
 import Button from "@/app/components/button";
 import AuthSocialButton from "./AuthSocialButton";
 import { BsGithub, BsGoogle } from "react-icons/bs";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type Variant = "LOGIN" | "REGISTER";
 export const AuthForm = () => {
+  const session = useSession();
+  const router = useRouter();
   const [variant, setVariant] = useState("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      router.push("/users");
+    }
+  }, [session?.status, router]);
 
   const toggleVariant = useCallback(() => {
     if (variant === "LOGIN") {
@@ -37,17 +49,46 @@ export const AuthForm = () => {
     setIsLoading(true);
 
     if (variant === "LOGIN") {
-      //login
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("Invalid Credentials");
+          }
+          if (callback?.ok && !callback?.error) {
+            toast.success("Logged In Successfully");
+            router.push("/users");
+          }
+        })
+        .finally(() => setIsLoading(false));
     }
 
     if (variant === "REGISTER") {
-      //register
+      axios
+        .post("/api/register", data)
+        .then(() => {
+          signIn("credentials", data);
+          toast.success("Registered Successfully");
+        })
+        .catch(() => toast.error("Something went wrong"))
+        .finally(() => setIsLoading(false));
     }
   };
 
   const socialAction = (action: string) => {
     setIsLoading(true);
-    //social login
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("Something went wrong");
+        }
+        if (callback?.ok && !callback?.error) {
+          toast.success("Logged In Successfully");
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -63,6 +104,7 @@ export const AuthForm = () => {
               placeholder="John Doe"
               required={true}
               register={register}
+              disabled={isLoading}
             />
           )}
           <Input
@@ -73,6 +115,7 @@ export const AuthForm = () => {
             type="email"
             placeholder="jhon@gmail.com"
             register={register}
+            disabled={isLoading}
           />
           <Input
             id="password"
@@ -82,8 +125,9 @@ export const AuthForm = () => {
             required={true}
             placeholder="ajlihj@123"
             register={register}
+            disabled={isLoading}
           />
-          {variant === "REGISTER" && (
+          {/* {variant === "REGISTER" && (    //this field is optional only for register
             <Input
               id="confirmPassword"
               errors={errors}
@@ -92,8 +136,9 @@ export const AuthForm = () => {
               required={true}
               placeholder="ajlihj@123"
               register={register}
+              disabled={isLoading}
             />
-          )}
+          )} */}
           <Button fullWidth type="submit" disabled={isLoading}>
             {variant === "LOGIN" ? "Login" : "Sign Up"}
           </Button>
