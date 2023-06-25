@@ -115,7 +115,7 @@ Next Auth makes use of the following open-source projects:
 
 ## Contact
 
-For any inquiries or questions, please contact [voidmainsk.1812@gmail.com](mailto:voidmainsk.1812@gmail.com).
+For any inquiries or questions, please contact [voidmain.1812@gmail.com](mailto:voidmainsk.1812@gmail.com).
 
 ---
 
