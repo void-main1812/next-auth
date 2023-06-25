@@ -1,5 +1,7 @@
 # Next Auth - Modern Authentication Template
 
+![preview for the live project](https://github.com/void-main1812/next-auth/assets/128049873/c53de73e-bf51-47a2-a0b8-c67afac06ceb)
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/void-main1812/next-auth/blob/main/LICENSE)
 
 Next Auth is a modern authentication template built using Next.js, Prisma, Next-Auth, MongoDB, Tailwind CSS, and TypeScript. It provides a minimal and responsive UI, along with configurable OAuth authentication options from GitHub and Google. This template aims to simplify the implementation of authentication in your Next.js applications while leveraging popular technologies.
