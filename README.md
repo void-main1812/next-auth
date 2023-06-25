@@ -45,7 +45,7 @@ npm install
 4. Create a `.env.local` file in the project root and add the following configuration variables:
 
 ```plaintext
-DATABASE_URL=mongodb://localhost:27017/next-auth
+DATABASE_URL=your_database_connection_url
 GITHUB_ID=your_github_client_id
 GITHUB_SECRET=your_github_client_secret
 GOOGLE_ID=your_google_client_id
