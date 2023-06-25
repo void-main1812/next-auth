@@ -1,6 +1,6 @@
 # Next Auth - Modern Authentication Template
 
-![preview for the live project](https://github.com/void-main1812/next-auth/assets/128049873/c53de73e-bf51-47a2-a0b8-c67afac06ceb)
+![Preview for the live project](https://github.com/void-main1812/next-auth/assets/128049873/7113bddb-63cb-4776-8688-809a8ef1a488)
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/void-main1812/next-auth/blob/main/LICENSE)
 
