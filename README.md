@@ -54,6 +54,8 @@ GOOGLE_SECRET=your_google_client_secret
 
 Replace `your_github_client_id`, `your_github_client_secret`, `your_google_client_id`, and `your_google_client_secret` with your actual OAuth application credentials obtained from GitHub and Google.
 
+Replace `your_database_connection_url` from the url you will get from your MongoDB Atlas account.
+
 ## Usage
 
 To start the development server, run the following command:
